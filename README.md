@@ -2,7 +2,7 @@
 
 ## Initialization instructions
 
-The basics - install dependencies and then run the `dev` script script:
+The basics - install dependencies and then run the `dev` script:
 
 ```bash
 npm i

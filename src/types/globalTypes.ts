@@ -7,6 +7,11 @@ export interface IGlobalContext {
   ilksContract?: IlksAbi;
 }
 
+export interface ICachedContext {
+  cdpList?: ExtendedICdp[];
+  setCachedCdpList: (cdpList?: ExtendedICdp[]) => void;
+}
+
 export enum CollateralType {
   "ETH-A" = "ETH-A",
   "WBTC-A" = "WBTC-A",

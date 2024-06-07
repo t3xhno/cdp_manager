@@ -1,11 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import type Web3 from "web3";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { type RpcError } from "web3";
 import { utils } from "@defisaver/tokens";
 import { type CdpAbi, type IlksAbi } from "@/types/abiTypes";
 
 import { useConfig } from "./useConfig";
 import { isStringNumeric } from "@/utils/helpers";
+import CacheContext from "@/context/CacheContext";
 import {
   CollateralType,
   type ExtendedICdp,
@@ -49,6 +51,11 @@ export const useCdpContract = ({
     MOCKS_RESOLVE_DELAY_MS,
     MAX_CONCURRENT_RPC_CALLS,
   } = useConfig();
+  const { setCachedCdpList, cdpList: cachedCdpList } = useContext(CacheContext);
+
+  useEffect(() => {
+    if (cachedCdpList) setCdpList(cachedCdpList);
+  }, []);
 
   type TestCdp = (cdp: ICdp, collateralType: string) => boolean;
   const testCdp: TestCdp = (cdp, collateralType) =>
@@ -82,6 +89,7 @@ export const useCdpContract = ({
     abortSignal: AbortSignal
   ) => {
     let shouldAbort = false;
+    setCachedCdpList(undefined);
 
     if (!isStringNumeric(cdpId)) {
       setError("Please enter a numeric string as the CDP id");
@@ -145,6 +153,7 @@ export const useCdpContract = ({
       }
 
       setCdpList(currentCdpData);
+      setCachedCdpList(currentCdpData);
     } catch (error) {
       setError(error as RpcError);
     } finally {

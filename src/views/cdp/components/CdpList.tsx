@@ -8,14 +8,12 @@ interface IProps {
   cdpList: ExtendedICdp[];
 }
 
-const CdpList: FC<IProps> = ({ cdpList }) => {
-  return (
-    <div className="cdp-list-wrapper">
-      {cdpList.map((cdp) => (
-        <CdpCard key={cdp.cdpId!} cdp={cdp} />
-      ))}
-    </div>
-  );
-};
+const CdpList: FC<IProps> = ({ cdpList }) => (
+  <div className="cdp-list-wrapper">
+    {cdpList.map((cdp) => (
+      <CdpCard key={cdp.cdpId!} cdp={cdp} />
+    ))}
+  </div>
+);
 
 export default CdpList;

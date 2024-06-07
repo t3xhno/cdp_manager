@@ -1,3 +1,5 @@
+# Tech Stack: React + Vite + Typescript
+
 ## Overview
 
 Small DeFi application. Connects to the injected MetaMask provider. It uses the MakerDAO protocol to read CDP vault data based on entered collateral type and CDP ID.

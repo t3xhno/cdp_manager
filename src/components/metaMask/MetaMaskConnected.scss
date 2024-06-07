@@ -1,0 +1,27 @@
+.connected-wrapper {
+    gap: 2rem;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .connected-container {
+        gap: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        
+        height: 100%;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        background: #1c1e1f;
+
+        .connected-dot {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #3f716c;
+        }
+    }
+}

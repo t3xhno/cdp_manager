@@ -1,0 +1,16 @@
+button {
+    border: none;
+    cursor: pointer;
+    color: #1c1e1f;
+    font-size: 1.2rem;
+    place-self: center;
+    padding: 1rem 2rem;
+    background: #3f716c;
+    border-radius: 0.5rem;
+
+    &:hover {
+        background: #30504f;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        transform: scale(1.02);
+    }
+}

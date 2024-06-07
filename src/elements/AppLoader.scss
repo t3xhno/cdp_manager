@@ -1,0 +1,24 @@
+.loader-wrapper {
+    width: 100%;
+    display: flex;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+    position: relative;
+    align-items: center;
+    background: #1c1e1f;
+    border-radius: 0.25rem;
+    justify-content: center;
+
+    & .progress {
+        left: 0;
+        z-index: 0;
+        height: 100%;
+        position: absolute;
+        background-color: #3f716c;
+    }
+    
+    p {
+        z-index: 1;
+    }
+}

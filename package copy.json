@@ -1,0 +1,39 @@
+{
+  "name": "decenter_technical_task",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run generate-typechain && vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "generate-typechain": "typechain --target web3-v1 --out-dir ./src/types/abiTypes './src/abis/*.json'"
+  },
+  "dependencies": {
+    "@defisaver/tokens": "^1.5.22",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@metamask/jazzicon": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
+    "web3": "^4.9.0"
+  },
+  "devDependencies": {
+    "@metamask/providers": "^17.0.0",
+    "@typechain/web3-v1": "^6.0.7",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "sass": "^1.77.4",
+    "typechain": "^8.3.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-tsconfig-paths": "^4.3.2"
+  }
+}

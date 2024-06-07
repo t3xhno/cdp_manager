@@ -1,0 +1,58 @@
+.faded-text {
+    color: #aaa;
+}
+
+.cdp-wrapper {
+    width: 23%;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    background: #202728;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    a {
+        width: 100%;
+        color: white;
+        text-decoration: none;
+
+        .cdp-owner {
+            width: 100%;
+            color: white;
+            font-size: 1.2rem;
+            padding: 1rem 0.5rem;
+            background: #40736d;
+        }
+
+        .cdp-details {
+            gap: 3rem;
+            display: flex;
+            padding: 1rem 0.5rem;
+            align-items: flex-start;
+            
+            .cdp-detail {
+                gap: 0.5rem;
+                display: flex;
+                flex-direction: column;
+
+                .info-data {
+                    gap: 0.2rem;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: flex-start;
+
+                    .info-value {
+                       font-size: 1.2rem; 
+                       line-height: 1.2rem;
+                    }
+
+                    .info-token {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+}
+

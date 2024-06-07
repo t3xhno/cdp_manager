@@ -1,0 +1,22 @@
+.no-cdp-wrapper {
+    gap: 2rem;
+    display: flex;
+    place-self: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    opacity: 0.3;
+
+    img {
+        width: auto;
+        height: 20rem;
+    }
+
+    p {
+        // color: #3f716c;
+        color: black;
+        font-weight: 900;
+        font-size: 1.2rem;
+    }
+}

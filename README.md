@@ -10,6 +10,14 @@ The basics - install dependencies and then run the `dev` script:
 
 ```bash
 npm i
+#
+# ============================= NOTE =============================
+#
+# @typehcain/web3-v1 has an older version web3 package dependency
+# This means that we potentially have to add the --legacy-peer-deps
+# flag when installing the node modules.
+# This does not appear to break the application at this time.
+#
 npm run dev
 ```
 

@@ -1,0 +1,51 @@
+.single-cdp-card {
+    display: flex;
+    overflow: hidden;
+    font-size: 2rem;
+    place-self: center;
+    background: #202728;
+    border-radius: 0.25rem;
+    flex-direction: column;
+
+    .cdp-header {
+        gap: 1rem;
+        display: flex;
+        padding: 1.5rem;
+        align-items: center;
+        background: #40736d;
+        justify-content: flex-start;
+    }
+
+    .cdp-rows {
+        gap: 4rem;
+        display: flex;
+        padding: 1.5rem;
+        padding-right: 10rem;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        & .faded-text {
+            font-size: 1rem;
+        }
+
+        .cdp-row {
+            gap: 10rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            .cdp-detail {
+                gap: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+
+                & p:nth-child(2) {
+                    min-width: 10pt;
+                }
+            }
+        }
+    }
+}

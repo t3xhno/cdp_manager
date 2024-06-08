@@ -25,8 +25,6 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
     maxCollateralWithdrawBeforeLiquidation,
   } = useFinance(cdpId!);
 
-  console.log(formatBigNumbers(700000));
-
   useEffect(() => {
     getFinancialData();
   }, []);
@@ -79,7 +77,6 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
               {collateralizationRatio !== undefined ? (
                 <p>{collateralizationRatio.toFixed(2)}%</p>
               ) : (
-                //   <p>Loading...</p>
                 <AppSpinner />
               )}
             </div>
@@ -103,7 +100,6 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
                   <span className="faded-text">{collateralType}</span>
                 </p>
               ) : (
-                //   <p>Loading...</p>
                 <AppSpinner />
               )}
             </div>
@@ -117,7 +113,6 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
                   <span className="faded-text">DAI</span>
                 </p>
               ) : (
-                //   <p>Loading...</p>
                 <AppSpinner />
               )}
             </div>
@@ -130,7 +125,6 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
               {collateralPrice !== undefined ? (
                 <p>${formatBigNumbers(collateralPrice)}</p>
               ) : (
-                //   <p>Loading...</p>
                 <AppSpinner />
               )}
             </div>
@@ -141,7 +135,6 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
               {liquidationFee != undefined ? (
                 <p>${formatBigNumbers(liquidationFee)}</p>
               ) : (
-                //   <p>Loading...</p>
                 <AppSpinner />
               )}
             </div>

@@ -7,11 +7,16 @@ import { CollateralType } from "@/types/globalTypes";
 
 interface IProps {
   isDisabled: boolean;
+  cachedCollateralType: CollateralType;
   handleCdpChange: (cdpId: string, collateralType: CollateralType) => void;
 }
 
-const CdpFetcher: FC<IProps> = ({ handleCdpChange, isDisabled }) => {
-  const [collateralType, setCollateralType] = useState(CollateralType["ETH-A"]);
+const CdpFetcher: FC<IProps> = ({
+  isDisabled,
+  handleCdpChange,
+  cachedCollateralType,
+}) => {
+  const [collateralType, setCollateralType] = useState(cachedCollateralType);
 
   const handleCollateralTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCollateralType(

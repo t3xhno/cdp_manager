@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { FC, useContext, useState } from "react";
 
 import GlobalContext from "@/context/GlobalContext";
@@ -9,8 +8,6 @@ import AppLoader from "@/elements/AppLoader";
 import AppButton from "@/elements/AppButton";
 import CdpFetcher from "./components/CdpFetcher";
 import NoCdpFound from "./components/NoCdpFound";
-// import RollerLoader from "@/elements/RollerLoader";
-import HourglassLoader from "@/elements/HourglassLoader";
 import { type CollateralType } from "@/types/globalTypes";
 
 const ViewCdp: FC = () => {
@@ -23,6 +20,7 @@ const ViewCdp: FC = () => {
     totalData,
     loadingProgress,
     fetchCdpListByCollateralType,
+    collateralType: cachedCollateralType,
   } = useCdpContract({
     provider: provider!,
     cdpContract: cdpContract!,
@@ -47,7 +45,11 @@ const ViewCdp: FC = () => {
 
   return (
     <>
-      <CdpFetcher handleCdpChange={handleCdpIdChange} isDisabled={isLoading} />
+      <CdpFetcher
+        isDisabled={isLoading}
+        handleCdpChange={handleCdpIdChange}
+        cachedCollateralType={cachedCollateralType}
+      />
       {error && <p className="error">{error.toString()}</p>}
       {isLoading && <AppLoader total={totalData} current={loadingProgress} />}
       {isLoading && abortController && (
@@ -56,14 +58,7 @@ const ViewCdp: FC = () => {
           handleClick={() => abortController.abort()}
         />
       )}
-      {cdpList.length ? (
-        <CdpList cdpList={cdpList} />
-      ) : !isLoading ? (
-        <NoCdpFound />
-      ) : (
-        <HourglassLoader />
-        // <RollerLoader />
-      )}
+      {cdpList.length ? <CdpList cdpList={cdpList} /> : <NoCdpFound />}
     </>
   );
 };

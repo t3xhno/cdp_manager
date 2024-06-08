@@ -41,14 +41,16 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
         <div className="cdp-row">
           <div className="cdp-detail">
             <p className="faded-text">Collateral:</p>
-            {collateral !== undefined ? (
-              <p>
-                {formatBigNumbers(collateral!)}
-                <span className="faded-text">{collateralType}</span>
-              </p>
-            ) : (
-              <AppSpinner />
-            )}
+            <div className="detail-info">
+              {collateral !== undefined ? (
+                <p>
+                  {formatBigNumbers(collateral!)}
+                  <span className="faded-text">{collateralType}</span>
+                </p>
+              ) : (
+                <AppSpinner />
+              )}
+            </div>
           </div>
           {/* <div className="cdp-detail">
             Total collateral USD value:
@@ -60,23 +62,27 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
           </div> */}
           <div className="cdp-detail">
             <p className="faded-text">Debt:</p>
-            {debt !== undefined ? (
-              <p>
-                {formatBigNumbers(debt)}
-                <span className="faded-text">DAI</span>
-              </p>
-            ) : (
-              <AppSpinner />
-            )}
+            <div className="detail-info">
+              {debt !== undefined ? (
+                <p>
+                  {formatBigNumbers(debt)}
+                  <span className="faded-text">DAI</span>
+                </p>
+              ) : (
+                <AppSpinner />
+              )}
+            </div>
           </div>
           <div className="cdp-detail">
             <p className="faded-text">Ratio:</p>
-            {collateralizationRatio !== undefined ? (
-              <p>{collateralizationRatio.toFixed(2)}%</p>
-            ) : (
-              //   <p>Loading...</p>
-              <AppSpinner />
-            )}
+            <div className="detail-info">
+              {collateralizationRatio !== undefined ? (
+                <p>{collateralizationRatio.toFixed(2)}%</p>
+              ) : (
+                //   <p>Loading...</p>
+                <AppSpinner />
+              )}
+            </div>
           </div>
           {/* <div className="cdp-detail">
             Liquidation ratio:
@@ -90,47 +96,55 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
         <div className="cdp-row">
           <div className="cdp-detail">
             <p className="faded-text">Safe to withdraw:</p>
-            {maxCollateralWithdrawBeforeLiquidation !== undefined ? (
-              <p>
-                {formatBigNumbers(maxCollateralWithdrawBeforeLiquidation)}
-                <span className="faded-text">{collateralType}</span>
-              </p>
-            ) : (
-              //   <p>Loading...</p>
-              <AppSpinner />
-            )}
+            <div className="detail-info">
+              {maxCollateralWithdrawBeforeLiquidation !== undefined ? (
+                <p>
+                  {formatBigNumbers(maxCollateralWithdrawBeforeLiquidation)}
+                  <span className="faded-text">{collateralType}</span>
+                </p>
+              ) : (
+                //   <p>Loading...</p>
+                <AppSpinner />
+              )}
+            </div>
           </div>
           <div className="cdp-detail">
             <p className="faded-text">Safe to indebt:</p>
-            {maxDebtRemainingBeforeLiquidation !== undefined ? (
-              <p>
-                {formatBigNumbers(maxDebtRemainingBeforeLiquidation)}
-                <span className="faded-text">DAI</span>
-              </p>
-            ) : (
-              //   <p>Loading...</p>
-              <AppSpinner />
-            )}
+            <div className="detail-info">
+              {maxDebtRemainingBeforeLiquidation !== undefined ? (
+                <p>
+                  {formatBigNumbers(maxDebtRemainingBeforeLiquidation)}
+                  <span className="faded-text">DAI</span>
+                </p>
+              ) : (
+                //   <p>Loading...</p>
+                <AppSpinner />
+              )}
+            </div>
           </div>
         </div>
         <div className="cdp-row">
           <div className="cdp-detail">
             <p className="faded-text">Collateral price:</p>
-            {collateralPrice !== undefined ? (
-              <p>${formatBigNumbers(collateralPrice)}</p>
-            ) : (
-              //   <p>Loading...</p>
-              <AppSpinner />
-            )}
+            <div className="detail-info">
+              {collateralPrice !== undefined ? (
+                <p>${formatBigNumbers(collateralPrice)}</p>
+              ) : (
+                //   <p>Loading...</p>
+                <AppSpinner />
+              )}
+            </div>
           </div>
           <div className="cdp-detail">
             <p className="faded-text">Liquidation fee:</p>
-            {liquidationFee != undefined ? (
-              <p>${formatBigNumbers(liquidationFee)}</p>
-            ) : (
-              //   <p>Loading...</p>
-              <AppSpinner />
-            )}
+            <div className="detail-info">
+              {liquidationFee != undefined ? (
+                <p>${formatBigNumbers(liquidationFee)}</p>
+              ) : (
+                //   <p>Loading...</p>
+                <AppSpinner />
+              )}
+            </div>
           </div>
         </div>
       </div>

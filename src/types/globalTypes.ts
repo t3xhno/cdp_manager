@@ -9,7 +9,9 @@ export interface IGlobalContext {
 
 export interface ICachedContext {
   cdpList?: ExtendedICdp[];
+  collType: CollateralType;
   setCachedCdpList: (cdpList?: ExtendedICdp[]) => void;
+  setCachedCollType: (collType: CollateralType) => void;
 }
 
 export enum CollateralType {

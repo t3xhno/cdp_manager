@@ -39,22 +39,29 @@ export const useCdpContract = ({
   cdpContract: CdpAbi;
   ilksContract: IlksAbi;
 }) => {
+  const {
+    setCachedCdpList,
+    setCachedCollType,
+    cdpList: cachedCdpList,
+    collType: cachedCollType,
+  } = useContext(CacheContext);
   const [isLoading, setIsLoading] = useState(false);
   const [singleCdp, setSingleCdp] = useState<ICdp>();
   const [cdpList, setCdpList] = useState<ICdp[]>([]);
   const [error, setError] = useState<RpcError | string>();
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [collateralRate, setCollateralRate] = useState<string>();
+  const [collateralType, setCollateralType] = useState(cachedCollType);
   const {
     ZERO_ADDRESS,
     CDP_DATA_COUNT,
     MOCKS_RESOLVE_DELAY_MS,
     MAX_CONCURRENT_RPC_CALLS,
   } = useConfig();
-  const { setCachedCdpList, cdpList: cachedCdpList } = useContext(CacheContext);
 
   useEffect(() => {
     if (cachedCdpList) setCdpList(cachedCdpList);
+    if (cachedCollType) setCollateralType(cachedCollType);
   }, []);
 
   type TestCdp = (cdp: ICdp, collateralType: string) => boolean;
@@ -90,6 +97,7 @@ export const useCdpContract = ({
   ) => {
     let shouldAbort = false;
     setCachedCdpList(undefined);
+    setCachedCollType(CollateralType["ETH-A"]);
 
     if (!isStringNumeric(cdpId)) {
       setError("Please enter a numeric string as the CDP id");
@@ -154,6 +162,9 @@ export const useCdpContract = ({
 
       setCdpList(currentCdpData);
       setCachedCdpList(currentCdpData);
+      setCachedCollType(
+        CollateralType[collateralType as keyof typeof CollateralType]
+      );
     } catch (error) {
       setError(error as RpcError);
     } finally {
@@ -206,6 +217,7 @@ export const useCdpContract = ({
     singleCdp,
     fetchCdpById,
     collateralRate,
+    collateralType,
     loadingProgress,
     getCollateralRate,
     getCollateralPrice,

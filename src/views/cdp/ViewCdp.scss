@@ -51,8 +51,9 @@
                 align-items: flex-start;
                 justify-content: flex-start;
 
-                & p:nth-child(2) {
-                    min-width: 10pt;
+                .detail-info {
+                    min-width: 12rem;
+                    min-height: 3rem;
                 }
             }
         }

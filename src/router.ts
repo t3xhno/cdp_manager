@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import ViewCdp from "./views/cdp/ViewCdp";
-import ViewCdpList from "./views/cdp/ViewCdpList";
+import ViewCdp from "./views/cdpSingle";
+import ViewCdpList from "./views/cdpList";
 
 const router = createBrowserRouter([
   {

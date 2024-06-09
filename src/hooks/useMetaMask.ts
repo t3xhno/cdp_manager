@@ -33,7 +33,8 @@ export const useMetaMask = () => {
   //   };
 
   const handleAccountChange = async (accounts: string[]) => {
-    setCurrentAccount(accounts[0]);
+    if (accounts.length === 0) location.reload();
+    else if (accounts[0] !== currentAccount) setCurrentAccount(accounts[0]);
     await getMyBalance();
   };
 

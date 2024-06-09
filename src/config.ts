@@ -5,3 +5,5 @@ export default {
   MOCKS_RESOLVE_DELAY_MS: 1000,
   ZERO_ADDRESS: "0x0000000000000000000000000000000000000000",
 };
+
+// Max CDP as of this writing on MakerDAO: 31738

@@ -134,15 +134,46 @@ export const useCdpContract = ({
 
       const nextIdGenerator = cdpIdGenerator(+cdpId);
 
+      let isTopCapped = false;
+      /*
+       * When top is capped (no more higher id positions), we have to double the batch size, so
+       * that we are left with a good size with only lower ids for the next batch. In that
+       * double size batch, if the initial batch is an odd number - we will have an alternating
+       * [batch size] and [batch size - 1] number of lower ids. In that case, we flip this
+       * variable, and add another id to the batch, which will then be lower, and will leave us
+       * with a batch size of [batch size] after filtering out the highers.
+       *
+       * If the initial batch size was even, we can safely assume perfect distribution and don't
+       * ever have to add anything to the batch - just halve it by filtering out the higher ids.
+       */
+      let addOne = true;
+
       while (currentCdpData.length < CDP_DATA_COUNT && !shouldAbort) {
         const nextBatchSize = Math.min(
           MAX_CONCURRENT_RPC_CALLS,
           CDP_DATA_COUNT - currentCdpData.length
         );
 
-        const nextBatchOfIds = Array(nextBatchSize)
-          .fill(1)
-          .map(() => nextIdGenerator.next().value as number);
+        const nextBatchOfIds = !isTopCapped
+          ? Array(nextBatchSize)
+              .fill(1)
+              .map(() => nextIdGenerator.next().value as number)
+          : /*
+             * Messy ternary operator logic for adding the padding id,
+             * but the logic is strongly coupled to the implementation
+             * by definition, anyway.
+             */
+            Array(nextBatchSize * 2 + (addOne ? (+cdpId % 2 === 0 ? 0 : 1) : 0))
+              .fill(1)
+              .map(() => nextIdGenerator.next().value as number)
+              .filter((id) => id <= +cdpId)
+              .slice(0, nextBatchSize);
+
+        // Flip to add/not add one to the next batch of iids
+        addOne = !addOne;
+
+        console.log(isTopCapped);
+        console.log(nextBatchOfIds);
 
         const result = await Promise.all(
           nextBatchOfIds.map((cdpId) => fetchCdpById(cdpId))
@@ -155,7 +186,11 @@ export const useCdpContract = ({
               totalDebt: totalDebt(cdp.debt, ilkData.rate),
               ...cdp,
             }))
-            .filter((cdp) => testCdp(cdp, collateralType))
+            .filter((cdp) => {
+              if (cdp.cdpId > +cdpId && cdp.owner === ZERO_ADDRESS)
+                isTopCapped = true;
+              return testCdp(cdp, collateralType);
+            })
         );
         setLoadingProgress(currentCdpData.length);
       }

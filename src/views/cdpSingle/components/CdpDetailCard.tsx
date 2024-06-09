@@ -75,7 +75,12 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
             <p className="faded-text">Ratio:</p>
             <div className="detail-info">
               {collateralizationRatio !== undefined ? (
-                <p>{collateralizationRatio.toFixed(2)}%</p>
+                <p>
+                  {!isNaN(collateralizationRatio)
+                    ? collateralizationRatio.toFixed(2)
+                    : 0}
+                  %
+                </p>
               ) : (
                 <AppSpinner />
               )}

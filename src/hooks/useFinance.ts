@@ -79,7 +79,7 @@ export const useFinance = (cdpId: string) => {
     const minCollateralValueBeforeLiquidation = fullDebt * 1.5;
     const minCollateralBeforeLiquidation =
       minCollateralValueBeforeLiquidation / colPrice;
-    const maxDebtBeforeLiquidation = collateralUsdValue * 1.5;
+    const maxDebtBeforeLiquidation = 1.5 * fullDebt - collateral;
     const maxCollWithdrawBeforeLiquidation = (
       collateral - minCollateralBeforeLiquidation
     ).toFixed(2);

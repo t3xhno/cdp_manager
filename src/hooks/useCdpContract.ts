@@ -180,7 +180,7 @@ export const useCdpContract = ({
     const hardCodedCurrentPricesInUSD = {
       [CollateralType["USDC-A"]]: 1,
       [CollateralType["ETH-A"]]: 3805.74,
-      [CollateralType["WBTC-A"]]: 71500.0,
+      [CollateralType["WBTC-A"]]: 69471.0,
     };
 
     return new Promise((resolve) =>

@@ -5,6 +5,12 @@
     align-items: center;
     justify-content: flex-start;
 
+    .connected-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .connected-container {
         gap: 0.5rem;
         display: flex;

@@ -28,7 +28,7 @@ const MetaMaskConnected: FC<IProps> = ({ account, balance }) => {
     <div className="connected-wrapper">
       <div className="connected-container">
         <div className="connect-avatar">
-          <div className="connect-avatar" ref={avatarIcon as any} />
+          <div className="connected-avatar" ref={avatarIcon as any} />
         </div>
         <div className="connected-account">
           <p>{formatAccount(account)}</p>

@@ -172,9 +172,6 @@ export const useCdpContract = ({
         // Flip to add/not add one to the next batch of iids
         addOne = !addOne;
 
-        console.log(isTopCapped);
-        console.log(nextBatchOfIds);
-
         const result = await Promise.all(
           nextBatchOfIds.map((cdpId) => fetchCdpById(cdpId))
         );

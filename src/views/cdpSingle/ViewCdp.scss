@@ -62,6 +62,39 @@
                     min-width: 12rem;
                     min-height: 3rem;
                 }
+
+                .has-tooltip {
+                    cursor: pointer;
+                    position: relative;
+
+                    .tooltip-box {
+                        top: 0;
+                        left: 50%;
+                        display: none;
+                        padding: 0.5rem;
+                        font-size: 1rem;
+                        padding-left: 1rem;
+                        position: absolute;
+                        width: max-content;
+                        background: #444;
+                        border-radius: 0.2rem;
+                        transform: translate(-50%, -100%);
+                        border-bottom: 2px solid #40736d;
+
+                        .faded-text {
+                            font-size: 0.7rem;
+                        }
+                    }
+
+
+                    &:hover .tooltip-box {
+                        gap: 0.5rem;
+                        display: flex;
+                        align-items: flex-end;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                    }
+                }
             }
         }
     }

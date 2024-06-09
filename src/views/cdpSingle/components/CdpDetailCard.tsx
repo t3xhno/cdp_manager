@@ -17,9 +17,9 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
     liquidationFee,
     collateralType,
     collateralPrice,
-    // liquidationRatio,
+    liquidationRatio,
     getFinancialData,
-    // collateralUsdValue,
+    collateralUsdValue,
     collateralizationRatio,
     maxDebtRemainingBeforeLiquidation,
     maxCollateralWithdrawBeforeLiquidation,
@@ -39,25 +39,24 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
         <div className="cdp-row">
           <div className="cdp-detail">
             <p className="faded-text">Collateral:</p>
-            <div className="detail-info">
+            <div className="detail-info has-tooltip">
               {collateral !== undefined ? (
-                <p>
+                <div>
                   {formatBigNumbers(collateral!)}
                   <span className="faded-text">{collateralType}</span>
-                </p>
+                  <div className="tooltip-box">
+                    <p>
+                      {collateral.toFixed(2)}
+                      <span className="faded-text">{collateralType}</span>
+                    </p>
+                    <p>${collateralUsdValue?.toFixed(2)}</p>
+                  </div>
+                </div>
               ) : (
                 <AppSpinner />
               )}
             </div>
           </div>
-          {/* <div className="cdp-detail">
-            Total collateral USD value:
-            {collateralUsdValue !== undefined ? (
-              <p>${collateralUsdValue.toFixed(2)}</p>
-            ) : (
-              <p>Loading...</p>
-            )}
-          </div> */}
           <div className="cdp-detail">
             <p className="faded-text">Debt:</p>
             <div className="detail-info">
@@ -72,7 +71,9 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
             </div>
           </div>
           <div className="cdp-detail">
-            <p className="faded-text">Ratio:</p>
+            <p className="faded-text">
+              Ratio: {liquidationRatio && `(min: ${liquidationRatio}%)`}
+            </p>
             <div className="detail-info">
               {collateralizationRatio !== undefined ? (
                 <p>
@@ -86,14 +87,6 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
               )}
             </div>
           </div>
-          {/* <div className="cdp-detail">
-            Liquidation ratio:
-            {liquidationRatio !== undefined ? (
-              <p>{liquidationRatio.toFixed(2)}</p>
-            ) : (
-              <p>Loading...</p>
-            )}
-          </div> */}
         </div>
         <div className="cdp-row">
           <div className="cdp-detail">

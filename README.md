@@ -4,6 +4,8 @@
 
 Small DeFi application. Connects to the injected MetaMask provider. It uses the MakerDAO protocol to read CDP vault data based on entered collateral type and CDP ID.
 
+It extends the existing MakerDAO Vault API by utilizing an algorithm to fetch the nearest [CDP_DATA_COUNT](#configuration) (see the [Configuration](#configuration) section) positions around the searched one (including it), lays them out on the page, and allows the users to select a single one to view more details about it.
+
 ## Initialization instructions
 
 FIrst of all - the `.env` file:

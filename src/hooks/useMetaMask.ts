@@ -9,15 +9,19 @@ import Web3Service from "@services/web3Service";
 const cdpAddress = "0x68C61AF097b834c68eA6EA5e46aF6c04E8945B2d";
 const ilksAddress = "0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B";
 
+let w3s: Web3Service;
+
 export const useMetaMask = () => {
   const [error, setError] = useState<RpcError>();
   const [provider, setProvider] = useState<Web3>();
+  const [signature, setSignature] = useState<string>();
   const [isConnecting, setIsConnecting] = useState(false);
   const [cdpContract, setCdpContract] = useState<CdpAbi>();
   const [ilksContract, setIlksContract] = useState<IlksAbi>();
   const [currentAccount, setCurrentAccount] = useState<string>();
 
-  const web3Service = new Web3Service();
+  let web3Service = w3s;
+  if (!web3Service) web3Service = new Web3Service();
 
   //   Heavy version
   //   const handleAccountChange = async () => {
@@ -27,6 +31,22 @@ export const useMetaMask = () => {
 
   const handleAccountChange = (accounts: string[]) => {
     setCurrentAccount(accounts[0]);
+  };
+
+  const signMyCdp = async () => {
+    setError(undefined);
+    try {
+      const currentAddress = (await web3Service.provider.eth.getAccounts())[0];
+      const signature = await web3Service.provider.eth.personal.sign(
+        "Ovo je moj CDP",
+        currentAddress,
+        import.meta.env.VITE_METAMASK_PASSPHRASE
+      );
+      setError(undefined);
+      setSignature(signature);
+    } catch (error) {
+      setError(error as RpcError);
+    }
   };
 
   const connectToMetaMask = async () => {
@@ -67,6 +87,8 @@ export const useMetaMask = () => {
   return {
     error,
     provider,
+    signature,
+    signMyCdp,
     cdpContract,
     isConnecting,
     ilksContract,

@@ -1,11 +1,11 @@
-import { FC, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { utils } from "@defisaver/tokens";
+import { FC, useContext, useState } from "react";
 
 import "./CdpCard.scss";
-import { formatAccount, formatBigNumbers } from "@/utils/strings";
 import GlobalContext from "@/context/GlobalContext";
 import { type ExtendedICdp } from "@/types/globalTypes";
+import { formatAccount, formatBigNumbers } from "@/utils/strings";
 
 interface IProps {
   cdp: ExtendedICdp;

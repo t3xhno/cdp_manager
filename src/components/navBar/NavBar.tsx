@@ -1,5 +1,6 @@
-import "./NavBar.scss";
 import { type ReactNode, FC } from "react";
+
+import "./NavBar.scss";
 
 interface IProps {
   children: ReactNode;

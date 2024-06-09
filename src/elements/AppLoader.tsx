@@ -1,5 +1,6 @@
-import "./AppLoader.scss";
 import { FC } from "react";
+
+import "./AppLoader.scss";
 
 interface IProps {
   total: number;

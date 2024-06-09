@@ -17,6 +17,27 @@
         border-radius: 0.5rem;
         background: #1c1e1f;
 
+        .connected-account {
+            gap: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            .eth-balance-value {
+                line-height: 1rem;
+            }
+
+            .eth-balance {
+                display: flex;
+                align-items: flex-end;
+            }
+
+            & span {
+                font-size: 0.7rem;
+            }
+        }
+
         .connected-dot {
             width: 1rem;
             height: 1rem;

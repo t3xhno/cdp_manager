@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import "./MetaMaskNotConnected.scss";
 import MetaMaskFoxLogo from "@assets/images/MetaMask_Fox.png";
 

@@ -1,4 +1,5 @@
 import type Web3 from "web3";
+
 import { type CdpAbi, type IlksAbi } from "./abiTypes";
 
 export interface IGlobalContext {

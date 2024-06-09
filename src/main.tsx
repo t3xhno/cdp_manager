@@ -1,11 +1,11 @@
-import "./main.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import { GlobalContextProvider } from "./context/GlobalContext.tsx";
 
+import "./main.scss";
 import router from "./router.ts";
 import { CacheProvider } from "./context/CacheContext.tsx";
+import { GlobalContextProvider } from "./context/GlobalContext.tsx";
 
 const { ethereum } = window;
 

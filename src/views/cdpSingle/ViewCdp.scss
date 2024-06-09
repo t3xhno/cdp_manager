@@ -5,12 +5,19 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+
+    .cdp-controls {
+        gap: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .single-cdp-card {
     display: flex;
-    overflow: hidden;
     font-size: 2rem;
+    overflow: hidden;
     place-self: center;
     background: #202728;
     border-radius: 0.25rem;

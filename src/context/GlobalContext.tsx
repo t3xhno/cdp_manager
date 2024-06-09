@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import "./GlobalContext.scss";
-import { useMetaMask } from "../hooks/useMetaMask";
-import { type IGlobalContext } from "../types/globalTypes";
 import { type ReactNode, createContext, FC, useEffect } from "react";
 
-import NavBar from "../components/NavBar";
+import "./GlobalContext.scss";
+import NavBar from "../components/navBar/NavBar";
+import { useMetaMask } from "../hooks/useMetaMask";
+import { type IGlobalContext } from "../types/globalTypes";
 import MetaMaskConnected from "@/components/metaMask/MetaMaskConnected";
 import MetaMaskNotConnected from "../components/metaMask/MetaMaskNotConnected";
 
@@ -21,6 +21,7 @@ const GlobalContext = createContext<IGlobalContext>({
 export const GlobalContextProvider: FC<IProps> = ({ children }) => {
   const {
     error,
+    balance,
     provider,
     cdpContract,
     ilksContract,
@@ -42,7 +43,7 @@ export const GlobalContextProvider: FC<IProps> = ({ children }) => {
             isConnecting={isConnecting}
           />
         ) : (
-          <MetaMaskConnected account={currentAccount!} />
+          <MetaMaskConnected account={currentAccount!} balance={balance} />
         )}
       </NavBar>
       <div className="page-wrapper">

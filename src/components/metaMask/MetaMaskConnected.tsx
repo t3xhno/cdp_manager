@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "./MetaMaskConnected.scss";
 import jazzicon from "@metamask/jazzicon";
 import { FC, useEffect, useRef } from "react";
 
+import "./MetaMaskConnected.scss";
 import { formatAccount } from "@utils/strings";
+import AppSpinner from "@/elements/AppSpinner";
 
 interface IProps {
   account: string;
+  balance?: string;
 }
 
-const MetaMaskConnected: FC<IProps> = ({ account }) => {
+const MetaMaskConnected: FC<IProps> = ({ account, balance }) => {
   const avatarIcon = useRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -28,7 +30,17 @@ const MetaMaskConnected: FC<IProps> = ({ account }) => {
         <div className="connect-avatar">
           <div className="connect-avatar" ref={avatarIcon as any} />
         </div>
-        <div className="connected-account">{formatAccount(account)}</div>
+        <div className="connected-account">
+          <p>{formatAccount(account)}</p>
+          <div className="eth-balance">
+            {balance ? (
+              <p className="eth-balance-value">{balance}</p>
+            ) : (
+              <AppSpinner size={1} />
+            )}
+            <span className="faded-text">ETH</span>
+          </div>
+        </div>
         <div className="connected-dot" />
       </div>
     </div>

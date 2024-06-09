@@ -5,6 +5,7 @@ import { type CdpAbi, type IlksAbi } from "../types/abiTypes";
 import cdpAbi from "@abis/cdpAbi.json";
 import ilksAbi from "@abis/ilksAbi.json";
 import Web3Service from "@services/web3Service";
+import { formatBigNumbers } from "@/utils/strings";
 
 const cdpAddress = "0x68C61AF097b834c68eA6EA5e46aF6c04E8945B2d";
 const ilksAddress = "0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B";
@@ -14,9 +15,11 @@ let w3s: Web3Service;
 export const useMetaMask = () => {
   const [error, setError] = useState<RpcError>();
   const [provider, setProvider] = useState<Web3>();
+  const [balance, setBalance] = useState<string>();
   const [signature, setSignature] = useState<string>();
   const [isConnecting, setIsConnecting] = useState(false);
   const [cdpContract, setCdpContract] = useState<CdpAbi>();
+  const [loadingBalance, setLoadingBalance] = useState(false);
   const [ilksContract, setIlksContract] = useState<IlksAbi>();
   const [currentAccount, setCurrentAccount] = useState<string>();
 
@@ -29,8 +32,23 @@ export const useMetaMask = () => {
   //     await connectToMetaMask();
   //   };
 
-  const handleAccountChange = (accounts: string[]) => {
+  const handleAccountChange = async (accounts: string[]) => {
     setCurrentAccount(accounts[0]);
+    await getMyBalance();
+  };
+
+  const getMyBalance = async () => {
+    setLoadingBalance(true);
+    try {
+      const balance = await web3Service.getBalance();
+      setBalance(
+        formatBigNumbers(+web3Service.provider.utils.fromWei(balance, "ether"))
+      );
+    } catch (error) {
+      setError(error as RpcError);
+    } finally {
+      setLoadingBalance(false);
+    }
   };
 
   const signMyCdp = async () => {
@@ -75,6 +93,7 @@ export const useMetaMask = () => {
         ilksAddress
       )) as unknown as IlksAbi;
       setIlksContract(initIlksContract);
+      await getMyBalance();
 
       setError(undefined);
     } catch (error) {
@@ -86,13 +105,16 @@ export const useMetaMask = () => {
 
   return {
     error,
+    balance,
     provider,
     signature,
     signMyCdp,
     cdpContract,
+    getMyBalance,
     isConnecting,
     ilksContract,
     currentAccount,
+    loadingBalance,
     connectToMetaMask,
   };
 };

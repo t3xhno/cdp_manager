@@ -1,5 +1,6 @@
-import "./AppButton.scss";
 import { FC } from "react";
+
+import "./AppButton.scss";
 
 interface IProps {
   btnText: string;

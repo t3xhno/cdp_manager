@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./ViewCdp.scss";
 import AppButton from "@/elements/AppButton";
-import CdpDetailCard from "./components/CdpDetailCard";
 import { useMetaMask } from "@/hooks/useMetaMask";
+import CdpDetailCard from "./components/CdpDetailCard";
 
 const ViewCdp: FC = () => {
   const { cdpId } = useParams();
@@ -17,11 +17,13 @@ const ViewCdp: FC = () => {
     <div className="cdp-card-container">
       {error && <p className="error">{error.message}</p>}
       <CdpDetailCard cdpId={cdpId!} />
-      <AppButton
-        btnText="Back to CDP list"
-        handleClick={handleBackButtonClick}
-      />
-      <AppButton btnText={"Sign this CDP"} handleClick={signMyCdp} />
+      <div className="cdp-controls">
+        <AppButton btnText={"Sign this CDP"} handleClick={signMyCdp} />
+        <AppButton
+          btnText="Back to CDP list"
+          handleClick={handleBackButtonClick}
+        />
+      </div>
       {signature && <p>{signature}</p>}
     </div>
   );

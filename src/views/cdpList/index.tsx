@@ -1,13 +1,12 @@
 import { FC, useContext, useState } from "react";
 
-import GlobalContext from "@/context/GlobalContext";
-import { useCdpContract } from "@/hooks/useCdpContract";
-
 import CdpList from "./components/CdpList";
 import AppLoader from "@/elements/AppLoader";
 import AppButton from "@/elements/AppButton";
 import CdpFetcher from "./components/CdpFetcher";
 import NoCdpFound from "./components/NoCdpFound";
+import GlobalContext from "@/context/GlobalContext";
+import { useCdpContract } from "@/hooks/useCdpContract";
 import { type CollateralType } from "@/types/globalTypes";
 
 const ViewCdp: FC = () => {

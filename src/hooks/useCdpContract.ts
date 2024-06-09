@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import type Web3 from "web3";
-import { useContext, useEffect, useState } from "react";
 import { type RpcError } from "web3";
 import { utils } from "@defisaver/tokens";
-import { type CdpAbi, type IlksAbi } from "@/types/abiTypes";
+import { useContext, useEffect, useState } from "react";
 
 import { useConfig } from "./useConfig";
 import { isStringNumeric } from "@/utils/helpers";
 import CacheContext from "@/context/CacheContext";
+import { type CdpAbi, type IlksAbi } from "@/types/abiTypes";
 import {
   CollateralType,
   type ExtendedICdp,

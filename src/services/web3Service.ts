@@ -7,6 +7,12 @@ class Web3Service {
     this.provider = new Web3(window.ethereum);
   }
 
+  public getProvider() {
+    if (this.provider) return this.provider;
+    this.provider = new Web3(window.ethereum);
+    return this.provider;
+  }
+
   public disconnectProvider() {
     this.provider.currentProvider?.disconnect();
   }
@@ -19,6 +25,11 @@ class Web3Service {
   public async getAccount() {
     const accounts = await this.provider.eth.getAccounts();
     return accounts[0];
+  }
+
+  public async getBalance() {
+    const account = await this.getAccount();
+    return await this.provider.eth.getBalance(account);
   }
 
   public async connectNetwork() {

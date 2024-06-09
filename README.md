@@ -6,7 +6,15 @@ Small DeFi application. Connects to the injected MetaMask provider. It uses the 
 
 ## Initialization instructions
 
-The basics - install dependencies and then run the `dev` script:
+FIrst of all - the `.env` file:
+
+```
+VITE_METAMASK_PASSPHRASE="your_metamask_passphrase"
+```
+
+This is required for making MetaMask signatures.
+
+After the `.env` file is set come the basics - install dependencies and then run the `dev` script:
 
 ```bash
 npm i
@@ -52,5 +60,3 @@ Uses a number of third party libraries. In no particular order:
 5. `typechain` and `@typechain/web3-v1` - `typechain` is a tool that is used to generate types for us from ABIs. `@typechain/web3-v1` is the tools extension telling it what target library to generate them for. In this case, since we are using `Web3JS`, that is our target.
 6. `sass` - `*.scss` preprocessor to write more compact CSS files.
 7. `vite-tsconfig-paths` - A `Vite` plugin that automatically mirrors our custom `compilerOptions.paths.*` aliases from the `tsconfig.json` file to our `vite.config.ts` file.
-
-**UNFINISHED**

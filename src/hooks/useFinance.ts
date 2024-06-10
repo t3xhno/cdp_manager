@@ -79,7 +79,8 @@ export const useFinance = () => {
     const minCollateralValueBeforeLiquidation = fullDebt * 1.5;
     const minCollateralBeforeLiquidation =
       minCollateralValueBeforeLiquidation / colPrice;
-    const maxDebtBeforeLiquidation = 1.5 * fullDebt - collateral;
+    const maxDebtBeforeLiquidation =
+      ((collateralUsdValue + fullDebt) / liqRatio) * 100 - fullDebt;
     const maxCollWithdrawBeforeLiquidation = (
       collateral - minCollateralBeforeLiquidation
     ).toFixed(2);

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import "./ViewCdp.scss";
+import "./CdpPage.scss";
 import AppButton from "@/elements/AppButton";
 import { useMetaMask } from "@/hooks/useMetaMask";
 import CdpDetailCard from "./components/CdpDetailCard";

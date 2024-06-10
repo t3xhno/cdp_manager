@@ -25,7 +25,7 @@
       "@utils/*": ["./src/utils/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@types/*": ["./src/types/*"],
-      "@views/*": ["./src/views/*"],
+      "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./src/assets/*"],
       "@services/*": ["./src/services/*"],
       "@elements/*": ["./src/elements/*"],

@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import ViewCdp from "./views/cdpSingle";
-import ViewCdpList from "./views/cdpList";
+import CdpPage from "@/pages/cdpSingle/CdpPage";
+import CdpListPage from "@/pages/cdpList/CdpListPage";
 
 const router = createBrowserRouter([
   {
@@ -11,11 +11,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        Component: ViewCdpList,
+        Component: CdpListPage,
       },
       {
         path: "/cdp/:cdpId",
-        Component: ViewCdp,
+        Component: CdpPage,
       },
     ],
   },

@@ -2,9 +2,9 @@
 import type Web3 from "web3";
 import { type RpcError } from "web3";
 import { utils } from "@defisaver/tokens";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
-import { useConfig } from "./useConfig";
+import Config from "@/config";
 import { isStringNumeric } from "@/utils/helpers";
 import CacheContext from "@/context/CacheContext";
 import { type CdpAbi, type IlksAbi } from "@/types/abiTypes";
@@ -45,28 +45,17 @@ export const useCdpContract = ({
     cdpList: cachedCdpList,
     collType: cachedCollType,
   } = useContext(CacheContext);
+  const [collateralType] = useState(cachedCollType);
   const [isLoading, setIsLoading] = useState(false);
   const [singleCdp, setSingleCdp] = useState<ICdp>();
-  const [cdpList, setCdpList] = useState<ICdp[]>([]);
   const [error, setError] = useState<RpcError | string>();
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [collateralRate, setCollateralRate] = useState<string>();
-  const [collateralType, setCollateralType] = useState(cachedCollType);
-  const {
-    ZERO_ADDRESS,
-    CDP_DATA_COUNT,
-    MOCKS_RESOLVE_DELAY_MS,
-    MAX_CONCURRENT_RPC_CALLS,
-  } = useConfig();
-
-  useEffect(() => {
-    if (cachedCdpList) setCdpList(cachedCdpList);
-    if (cachedCollType) setCollateralType(cachedCollType);
-  }, []);
+  const [cdpList, setCdpList] = useState<ICdp[]>(cachedCdpList || []);
 
   type TestCdp = (cdp: ICdp, collateralType: string) => boolean;
   const testCdp: TestCdp = (cdp, collateralType) =>
-    cdp.owner !== ZERO_ADDRESS &&
+    cdp.owner !== Config.ZERO_ADDRESS &&
     utils.bytesToString(cdp.ilk) === collateralType;
 
   type TotalDebt = (debt: string, rate: string) => number;
@@ -122,7 +111,7 @@ export const useCdpContract = ({
       const currentCdpData: ExtendedICdp[] = [];
       const initialCdp = await fetchCdpById(+cdpId);
 
-      if (initialCdp.owner === ZERO_ADDRESS)
+      if (initialCdp.owner === Config.ZERO_ADDRESS)
         throw new Error(`CDP with ID ${cdpId} doesn't exist!`);
 
       if (testCdp(initialCdp, collateralType))
@@ -148,10 +137,10 @@ export const useCdpContract = ({
        */
       let addOne = true;
 
-      while (currentCdpData.length < CDP_DATA_COUNT && !shouldAbort) {
+      while (currentCdpData.length < Config.CDP_DATA_COUNT && !shouldAbort) {
         const nextBatchSize = Math.min(
-          MAX_CONCURRENT_RPC_CALLS,
-          CDP_DATA_COUNT - currentCdpData.length
+          Config.MAX_CONCURRENT_RPC_CALLS,
+          Config.CDP_DATA_COUNT - currentCdpData.length
         );
 
         const nextBatchOfIds = !isTopCapped
@@ -184,7 +173,7 @@ export const useCdpContract = ({
               ...cdp,
             }))
             .filter((cdp) => {
-              if (cdp.cdpId > +cdpId && cdp.owner === ZERO_ADDRESS)
+              if (cdp.cdpId > +cdpId && cdp.owner === Config.ZERO_ADDRESS)
                 isTopCapped = true;
               return testCdp(cdp, collateralType);
             })
@@ -218,7 +207,7 @@ export const useCdpContract = ({
     return new Promise((resolve) =>
       setTimeout(
         () => resolve(hardCodedCurrentPricesInUSD[collateralType]),
-        MOCKS_RESOLVE_DELAY_MS
+        Config.MOCKS_RESOLVE_DELAY_MS
       )
     );
   };
@@ -235,7 +224,7 @@ export const useCdpContract = ({
     return new Promise((resolve) =>
       setTimeout(
         () => resolve(hardCodedLiquidationRatios[collateralType]),
-        MOCKS_RESOLVE_DELAY_MS
+        Config.MOCKS_RESOLVE_DELAY_MS
       )
     );
   };
@@ -253,8 +242,8 @@ export const useCdpContract = ({
     loadingProgress,
     getCollateralRate,
     getCollateralPrice,
-    totalData: CDP_DATA_COUNT,
     fetchCdpListByCollateralType,
+    totalData: Config.CDP_DATA_COUNT,
     getLiquidationRationForCollateral,
   };
 };

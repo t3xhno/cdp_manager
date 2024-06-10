@@ -23,10 +23,10 @@ const CdpDetailCard: FC<IProps> = ({ cdpId }) => {
     collateralizationRatio,
     maxDebtRemainingBeforeLiquidation,
     maxCollateralWithdrawBeforeLiquidation,
-  } = useFinance(cdpId!);
+  } = useFinance();
 
   useEffect(() => {
-    getFinancialData();
+    getFinancialData(cdpId!);
   }, []);
 
   return (

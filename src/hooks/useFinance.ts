@@ -5,7 +5,7 @@ import GlobalContext from "@/context/GlobalContext";
 import { CollateralType } from "@/types/globalTypes";
 import { useCdpContract } from "@/hooks/useCdpContract";
 
-export const useFinance = (cdpId: string) => {
+export const useFinance = () => {
   const { cdpContract, ilksContract, provider } = useContext(GlobalContext);
   const {
     totalDebt,
@@ -37,7 +37,7 @@ export const useFinance = (cdpId: string) => {
     setMaxCollateralWithdrawBeforeLiquidation,
   ] = useState<number>();
 
-  const getFinancialData = async () => {
+  const getFinancialData = async (cdpId: string) => {
     const cdp = await fetchCdpById(+cdpId!);
     setOwner(cdp.owner);
     const collateralType = utils.bytesToString(cdp.ilk);
